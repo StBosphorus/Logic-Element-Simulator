@@ -1,0 +1,56 @@
+.table{
+    width:160px;
+    height:500px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    background: rgb(58, 48, 48);
+}
+.remove_btn{
+    width: 100px;
+    height: 100px;
+	background: rgb(123, 6, 6);
+}
+
+
+#target {
+    position : absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.drag {
+    cursor: grabbing;
+    z-index: 1001;
+}
+
+.gates{
+    width:70px;
+    height:70px;
+    background: white;
+    cursor: pointer;
+}
+
+.set_items{
+    width:70px;
+    height:70px;
+    position:absolute;
+    top: 50%;
+	left:70%;
+}
+
+.x_lines{
+    height: 2px;
+	background: black;
+    position: absolute;
+}
+.y_lines{
+    width: 2px;
+	background: black;
+    position: absolute;
+}
