@@ -269,11 +269,6 @@ function mup(e) {
 
 //縦線要素に対してマウスが押された際の関数
 function yline_down(e){
-    
-    //クラス名に .drag を追加
-    this.classList.remove("pointer");
-    this.classList.add("drag");
-
     //タッチイベントとマウスのイベントの差異を吸収
     if(e.type === "mousedown") {
         let event = e;
@@ -290,6 +285,7 @@ function yline_down(e){
 
     //リセットが押されると1セットの線要素を削除
     if(remove_judge){
+        remove_judge = false;
         for(let i=1;i<j+1;i++){
             if(this===connecting_items[i][2]){
                 removeLines(connecting_items[i][2],connecting_items[i][3],connecting_items[i][4]);
@@ -304,8 +300,12 @@ function yline_down(e){
                 // [0]がoutputと[1]がinput
             }
         }
-        remove_judge = false;
+    }else if(this.classList.contains('5_lines')){
     }else{
+        //クラス名に .drag を追加
+        this.classList.remove("pointer");
+        this.classList.add("drag");
+        
         //ムーブイベントにコールバック
         document.body.addEventListener("mousemove", yline_move, false);
         document.body.addEventListener("touchmove", yline_move, false);
@@ -386,17 +386,12 @@ function make_line(x1,y1,x2,y2){
             xy_line[i] = document.createElement('div');
             if(i===1){                               //線要素2つ目のみ縦線設定
                 xy_line[i].className = 'y_lines';
-                xy_line[i].classList.add('pointer');
                 lines_container.appendChild(xy_line[i]);
             }else{                                  //線要素1,3つ目横線設定
                 xy_line[i].className = 'x_lines';
                 lines_container.appendChild(xy_line[i]);
             }
         }
-
-        //縦線にクリックイベントを追加
-        xy_line[1].addEventListener("mousedown", yline_down, false);
-
         xy_line[3] = xy_line[4] = null;
     }else{
         for(let i=0;i<5;i++){
@@ -409,7 +404,11 @@ function make_line(x1,y1,x2,y2){
                 lines_container.appendChild(xy_line[i]);
             }
         }
+        xy_line[1].classList.add('5_lines');
     }
+    //縦線にクリックイベントを追加
+    xy_line[1].addEventListener("mousedown", yline_down, false);
+    xy_line[1].classList.add('pointer');
 
     let lines_ = xy_line;
 
